@@ -1,0 +1,17 @@
+#bit t1if = 0x0c.0
+void timer()
+{
+   if (t1if==1) 
+   {
+      set_timer1(32411); //nap dua theo cong thuc 
+      n++;            
+      t1if=0;        
+      if (n==100)   
+      {            
+         n=0;   
+         sens++;          //tang bien can tim len 1
+         if (sens>4)
+            sens=1; 
+      }               
+   }
+}  

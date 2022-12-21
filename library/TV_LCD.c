@@ -1,0 +1,36 @@
+#define lcd_rs       pin_e0
+#define lcd_e        pin_e2
+#define lcd_output   output_d
+
+void lcd_command(int8 data)
+{
+   output_low(lcd_rs);
+   lcd_output(data);
+   output_high(lcd_e);   
+   output_low(lcd_e); 
+   delay_us(200);
+}  
+
+void lcd_data (int8 data)
+{
+   output_high(lcd_rs);
+   lcd_output(data);
+   output_high(lcd_e);   
+   output_low(lcd_e); 
+   delay_us(200);
+}
+
+void lcd_setup()
+{
+   lcd_command(0x38); delay_ms(5);
+   lcd_command(0x0c);
+   lcd_command(0x01); delay_ms(2); 
+}
+
+void lcd_position (int8 x, int8 y) //x0-3, y0-19
+{
+   const int8 dc[]={0x80,0xc0,0x94,0xd4};
+   lcd_command(dc[x]+y); 
+}      
+
+

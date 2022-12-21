@@ -1,0 +1,35 @@
+//!#define output_key output_port
+//!#define pin_0  pin_a0
+//!#define pin_1  pin_a1
+//!#define pin_2  pin_a2
+//!#define pin_3  pin_a3
+unsigned int8 KEY_4X4()
+{
+      unsigned int8 cot,mp=0xff;
+      const unsigned int8 mq[]={0xef,0xdf,0xbf,0x7f};
+      for(cot=0;cot<4;cot++)
+      {
+            output_key(mq[cot]);//sua port ket noi 
+            while(input(pin_0)==0) mp=cot*4;// sua input pin
+            while(input(pin_1)==0) mp=cot*4+1;
+            while(input(pin_2)==0) mp=cot*4+2;
+            while(input(pin_3)==0) mp=cot*4+3;
+      }
+      return mp;
+      
+}
+//!void main()
+//!{
+//!      unsigned int8 maphim;
+//!      set_tris_b(0x0f);
+//!      while(true)
+//!      {
+//!         maphim=quetphim();
+//!         delay_ms(20);
+//!         if(maphim!=0xff)
+//!         {
+//!            hienthi(maphim);
+//!         }
+//!      }
+//!      
+//!}
